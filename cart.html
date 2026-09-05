@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>السلة | PC STORE</title>
+
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="container navbar-content">
+                <a href="index.html" class="logo">PC<span>STORE</span></a>
+
+                <nav class="nav-links">
+                    <a href="index.html">الرئيسية</a>
+                    <a href="products.html">المنتجات</a>
+                    <a href="#">العروض</a>
+                    <a href="#">اتصل بنا</a>
+                </nav>
+
+                <div class="nav-actions">
+                    <a href="cart.html" class="cart-btn">🛒<span class="cart-count">0</span></a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Cart -->
+        <main>
+            <section class="cart-page">
+                <div class="container">
+                    <div class="page-heading">
+                        <p class="section-label">طلبك</p>
+                        <h1>سلة المشتريات</h1>
+                    </div>
+
+                    <div class="cart-layout">
+                        <!-- Cart Products -->
+                        <div class="cart-items" id="cartItems"></div>
+
+                        <!-- Summary -->
+                        <aside class="cart-summary">
+                            <h2>ملخص الطلب</h2>
+
+                            <div class="summary-row">
+                                <span>المنتجات</span>
+                                <strong id="cartSubtotal">0DA</strong>
+                            </div>
+
+                            <div class="summary-row">
+                                <span>التوصيل</span>
+                                <strong>يحسب لاحقًا</strong>
+                            </div>
+
+                            <hr>
+
+                            <div class="summary-total">
+                                <span>المجموع</span>
+                                <strong id="cartTotal">0DA</strong>
+                            </div>
+
+                            <button class="checkout-btn" id="checkoutBtn">متابعة الطلب</button>
+                        </aside>
+                    </div>
+
+                    <!-- Empty Cart -->
+                    <div class="empty-cart" id="emptyCart">
+                        <div>🛒</div>
+                        <h2>السلة فارغة</h2>
+                        <p>لم تضف أي منتجات إلى السلة بعد.</p>
+                        <a href="products.html" class="btn primary">تصفح المنتجات</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">© 2026 PC STORE</div>
+            </div>
+        </footer>
+
+        <script src="js/products.js"></script>
+        <script src="js/cart.js"></script>
+    </body>
+</html>

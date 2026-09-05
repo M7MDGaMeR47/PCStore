@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>المنتجات | PC STORE</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+    <body>
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="container navbar-content">
+                <a href="index.html" class="logo">PC<span>STORE</span></a>
+
+                <nav class="nav-links">
+                    <a href="index.html">الرئيسية</a>
+                    <a href="products.html" class="active">المنتجات</a>
+                    <a href="#">العروض</a>
+                    <a href="#">اتصل بنا</a>
+                </nav>
+
+                <div class="nav-actions">
+                    <button class="search-btn">🔍</button>
+                    <button class="cart-btn">🛒<span class="cart-count">0</span></button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Products Page -->
+        <main>
+            <section class="products-page">
+                <div class="container">
+                    <div class="page-heading">
+                        <p class="section-label">منتجاتنا</p>
+                        <h1>جميع المنتجات</h1>
+                        <p>اكتشف أجهزة الكمبيوتر ومكوناتها وإكسسواراتها.</p>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="products-filters">
+                        <div class="search-box">
+                            <input type="text" id="productSearch" placeholder="ابحث عن منتج...">
+                            <span>🔍</span>
+                        </div>
+
+                        <select id="categoryFilter">
+                            <option value="all">جميع الفئات</option>
+                            <option value="PC">PCs (Full PC)</option>
+                            <option value="GPU">GPU</option>
+                            <option value="CPU">CPU</option>
+                            <option value="RAM">RAM</option>
+                            <option value="Controller">Controller</option>
+                            <option value="Laptops">Laptops</option>
+                            <option value="HDD">HDD</option>
+                            <option value="SSD">SSD</option>
+                        </select>
+
+                        <select id="priceSort">
+                            <option value="default">ترتيب حسب</option>
+                            <option value="low">السعر: من الأقل للأعلى</option>
+                            <option value="high">السعر: من الأعلى للأقل</option>
+                        </select>
+                    </div>
+
+
+                    <!-- Products -->
+                    <div class="products-grid" id="productsPage"></div>
+
+                    <!-- No Products -->
+                    <div class="no-products" id="noProducts">
+                        <span>🔎</span>
+                        <h3>لم نجد أي منتج</h3>
+                        <p>جرب تغيير البحث أو الفئة</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div>
+                        <a href="index.html" class="logo">PC<span>STORE</span></a>
+                        <p>كل ما تحتاجه لعالم الكمبيوتر والألعاب.</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">© 2026 PC STORE</div>
+            </div>
+        </footer>
+
+        <script src="js/products.js"></script>
+        <script src="js/products-page.js"></script>
+    </body>
+</html>
