@@ -1,0 +1,14 @@
+{
+  "name": "pc-store",
+  "version": "1.0.0",
+  "description": "PC Store - Khalil Tech",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node -e \"console.log('Build successful')\""
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

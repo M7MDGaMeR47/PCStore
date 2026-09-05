@@ -1,0 +1,29 @@
+[
+  {
+    "code": "KHALIL-TECH-2026-CASH",
+    "issuedTo": "خليل تك (Khalil Tech)",
+    "status": "active",
+    "paymentType": "Cash (مدفوع كاش لمصمم الموقع)",
+    "createdAt": "2026-09-05T00:00:00.000Z",
+    "activatedAt": "2026-09-05T00:00:00.000Z",
+    "notes": "الترخيص الرئيسي المعتمد لخليل تك من قِبل مسؤول ومصمم الموقع"
+  },
+  {
+    "code": "KT-CASH-7891",
+    "issuedTo": "خليل تك (كود احتياطي)",
+    "status": "available",
+    "paymentType": "Cash عند التسليم",
+    "createdAt": "2026-09-05T00:00:00.000Z",
+    "activatedAt": null,
+    "notes": "كود متاح للتفعيل الفوري"
+  },
+  {
+    "code": "KT-VIP-9942",
+    "issuedTo": "خليل تك (ترخيص سنوي VIP)",
+    "status": "available",
+    "paymentType": "Cash عند التسليم",
+    "createdAt": "2026-09-05T00:00:00.000Z",
+    "activatedAt": null,
+    "notes": "كود إضافي متاح لدى مصمم الموقع"
+  }
+]

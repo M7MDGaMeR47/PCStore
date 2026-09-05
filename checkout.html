@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إرسال الطلب عبر واتساب | PC STORE - KHALIL TECH</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="top-bar-left">
+                <span>💬 طلب مباشر وسريع عبر واتساب مع صاحب المتجر | بدون وسيط</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="tel:0550123456" class="top-bar-link">📞 0550 12 34 56</a>
+                <a href="cart.html" class="top-bar-link">🛒 العودة للسلة</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <header class="navbar">
+        <div class="container navbar-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">⚡</div>
+                <div>
+                    PC<span>STORE</span>
+                    <span class="logo-sub">KHALIL TECH</span>
+                </div>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="products.html">جميع المنتجات</a>
+                <a href="cart.html">السلة</a>
+                <a href="admin.html" style="color:var(--primary-light); font-weight:700;">⚡ لوحة خليل تك</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="admin.html" class="btn btn-secondary btn-sm" style="font-size:12px; padding:6px 12px; white-space:nowrap;" title="بوابة خليل تك والمصمم">⚡ خليل تك</a>
+                <a href="cart.html" class="action-btn cart-btn">
+                    🛒<span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main style="padding: 40px 0 90px;">
+        <div class="container">
+            <div class="breadcrumbs">
+                <a href="index.html">الرئيسية</a>
+                <span>/</span>
+                <a href="cart.html">السلة</a>
+                <span>/</span>
+                <span style="color:#fff;">تأكيد المعلومات والطلب عبر واتساب</span>
+            </div>
+
+            <div class="section-header" style="margin-bottom: 25px;">
+                <div>
+                    <p class="section-label">طلب فوري ومباشر</p>
+                    <h1 class="section-title">📲 إرسال الطلب لصاحب المتجر عبر واتساب</h1>
+                </div>
+            </div>
+
+            <!-- WhatsApp Instructions Banner -->
+            <div style="background:rgba(34, 197, 94, 0.1); border:1px solid rgba(34, 197, 94, 0.3); border-radius:var(--radius-sm); padding:16px 20px; margin-bottom:25px; display:flex; align-items:center; gap:16px;">
+                <div style="font-size:32px;">💬</div>
+                <div>
+                    <strong style="color:#4ade80; font-size:15px; display:block; margin-bottom:4px;">طريقة الشراء المباشرة عبر واتساب:</strong>
+                    <span style="color:var(--text-muted); font-size:13px; line-height:1.6;">
+                        املأ بياناتك أدناه واضغط زر الإرسال. سيتم فتح محادثة واتساب تلقائياً مع صاحب المتجر متضمنة جميع القطع المختارة وعنوانك ورسالتك الخاصة للاتفاق والتأكيد الفوري.
+                    </span>
+                </div>
+            </div>
+
+            <div class="cart-layout" id="checkoutContainer">
+                <!-- Left: Customer Information Form -->
+                <div>
+                    <form id="checkoutForm" class="checkout-form" onsubmit="handleWhatsAppCheckoutSubmit(event)">
+                        <h3 style="font-size: 18px; font-weight: 800; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 18px; color:#fff;">
+                            👤 معلومات المشتري ومكان الاستلام
+                        </h3>
+
+                        <!-- Full Name -->
+                        <div class="form-group">
+                            <label for="custName">الاسم واللقب <span>*</span></label>
+                            <input type="text" id="custName" class="form-control" placeholder="مثال: أمين بلقاسم" required>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="form-group">
+                            <label for="custPhone">رقم الهاتف للتواصل <span>*</span></label>
+                            <input type="tel" id="custPhone" class="form-control" placeholder="0550123456" required>
+                            <span style="font-size:12px; color:var(--text-dim);">الرقم الذي سيتواصل معك البائع من خلاله.</span>
+                        </div>
+
+                        <!-- Wilaya & Commune -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="custWilaya">الولاية <span>*</span></label>
+                                <select id="custWilaya" class="form-control" required>
+                                    <option value="" disabled selected>اختر الولاية (58 ولاية)...</option>
+                                    <!-- Populated dynamically -->
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="custCommune">البلدية أو الدائرة <span>*</span></label>
+                                <input type="text" id="custCommune" class="form-control" placeholder="مثال: غليزان، وهران، الحراش..." required>
+                            </div>
+                        </div>
+
+                        <!-- Detailed Address -->
+                        <div class="form-group">
+                            <label for="custAddress">العنوان بالتفصيل <span>*</span></label>
+                            <input type="text" id="custAddress" class="form-control" placeholder="اسم الحي، الشارع، أو نقطة استلام قريبة منك..." required>
+                        </div>
+
+                        <!-- Custom Message / Inquiry -->
+                        <div class="form-group">
+                            <label for="custNotes" style="display:flex; justify-content:space-between;">
+                                <span>💬 رسالة نصية أو استفسار لصاحب المتجر (اختياري)</span>
+                                <span style="font-weight:normal; color:var(--text-dim); font-size:12px;">ترسل في واتساب</span>
+                            </label>
+                            <textarea id="custNotes" class="form-control" rows="3" placeholder="مثال: هل يمكن تركيب معجون حراري إضافي؟ أو التوصيل بعد الساعة 4 مساءً؟ أو أي استفسار تريده..."></textarea>
+                        </div>
+
+                        <button type="submit" id="submitOrderBtn" class="btn btn-success btn-lg" style="width:100%; font-size:17px; padding:16px; margin-top:10px; background:#22c55e; border-color:#22c55e; box-shadow:0 6px 20px rgba(34, 197, 94, 0.3);">
+                            📲 إرسال الطلب ومعلوماتي عبر واتساب للبائع
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right: Order Items Review -->
+                <aside class="order-summary-box">
+                    <h2 class="summary-heading">📦 محتويات طلبك (${getCartCount()} قطع)</h2>
+
+                    <div id="checkoutItemsList" style="display:flex; flex-direction:column; gap:12px; margin-bottom:20px; max-height:300px; overflow-y:auto;">
+                        <!-- Items populated dynamically -->
+                    </div>
+
+                    <div class="summary-line total" style="border-top:1px solid var(--border-color); padding-top:16px;">
+                        <span>إجمالي ثمن المنتجات:</span>
+                        <strong id="checkoutSubtotal" style="color:var(--primary-light); font-size:22px;">0 DA</strong>
+                    </div>
+
+                    <div style="background:var(--bg-main); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:14px; margin-top:15px;">
+                        <div style="font-size:13px; color:#fff; font-weight:700; margin-bottom:6px;">✨ مميزات الطلب المباشر:</div>
+                        <ul style="font-size:12px; color:var(--text-dim); line-height:1.7; padding-right:18px; margin:0;">
+                            <li>محادثة مباشرة مع صاحب المتجر بدون أي وسيط.</li>
+                            <li>تأكيد المواصفات وفيديو للجهاز إذا أردت قبل الإرسال.</li>
+                            <li>الدفع عند الاستلام بعد فحص القطع.</li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Confirmation Modal after sending to WhatsApp -->
+    <div id="orderSuccessModal" class="auth-modal-overlay" style="display:none;">
+        <div class="auth-modal-content" style="max-width:560px; text-align:center;">
+            <div style="width:65px; height:65px; background:rgba(34, 197, 94, 0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:32px; color:#4ade80; margin:0 auto 15px; border:2px solid #22c55e;">
+                ✓
+            </div>
+            <h2 style="font-size:22px; font-weight:800; color:#fff; margin-bottom:8px;">تم تجهيز طلبك بنجاح! ⚡</h2>
+            <p style="font-size:14px; color:var(--text-muted); margin-bottom:20px; line-height:1.6;">
+                تم تسجيل معلومات طلبك في النظام، واضغط على الزر الأخضر بالأسفل لفتح محادثة واتساب مع صاحب المتجر وإرسال الرسالة مباشرة.
+            </p>
+
+            <div style="background:var(--bg-main); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:14px; text-align:right; margin-bottom:20px; max-height:160px; overflow-y:auto; font-size:13px; color:var(--text-muted); white-space:pre-wrap; font-family:monospace;" id="modalMessagePreview">
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:10px;">
+                <a id="modalWhatsAppBtn" href="#" target="_blank" class="btn btn-success btn-lg" style="width:100%; font-size:16px; padding:14px; background:#22c55e; border-color:#22c55e;">
+                    💬 فتح محادثة واتساب الآن
+                </a>
+                <button type="button" class="btn btn-outline" onclick="copyOrderMessage()">
+                    📋 نسخ نص الطلب
+                </button>
+                <a href="products.html" class="btn btn-ghost" style="color:var(--text-dim);">
+                    العودة لتصفح المنتجات
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2026 PC STORE - KHALIL TECH. جميع الحقوق محفوظة.</p>
+                <div style="display:flex; gap:15px;">
+                    <a href="index.html">الرئيسية</a>
+                    <a href="products.html">المنتجات</a>
+                    <a href="admin.html" style="color:var(--primary-light);">⚡ لوحة تحكم خليل تك (دخول المالك)</a>
+                    <a href="https://wa.me/213550123456" target="_blank">واتساب المتجر</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        let preparedWaLink = "";
+        let preparedMessage = "";
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            const cart = getCart();
+            if (cart.length === 0) {
+                alert("سلة المشتريات فارغة، يرجى اختيار منتجات أولاً.");
+                window.location.href = "products.html";
+                return;
+            }
+
+            renderCheckoutReview();
+            await loadWilayasDropdown();
+            autoFillUserData();
+        });
+
+        function renderCheckoutReview() {
+            const cart = getCart();
+            const list = document.getElementById("checkoutItemsList");
+            const subtotalEl = document.getElementById("checkoutSubtotal");
+
+            const subtotal = getCartSubtotal();
+            if (subtotalEl) subtotalEl.textContent = formatDinar(subtotal);
+
+            if (list) {
+                list.innerHTML = cart.map(item => `
+                    <div style="display:flex; align-items:center; gap:12px; background:var(--bg-main); padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
+                        <img src="${item.image}" alt="${item.name}" style="width:45px; height:45px; object-fit:contain; background:#080a0f; border-radius:4px; padding:3px;">
+                        <div style="flex-grow:1; min-width:0;">
+                            <h5 style="font-size:13px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#fff;">${item.name}</h5>
+                            <div style="font-size:12px; color:var(--text-dim);">${item.quantity} × ${formatDinar(item.price)}</div>
+                        </div>
+                        <strong style="font-size:13px; color:var(--primary-light);">${formatDinar(item.price * item.quantity)}</strong>
+                    </div>
+                `).join("");
+            }
+        }
+
+        async function loadWilayasDropdown() {
+            const select = document.getElementById("custWilaya");
+            const wilayas = await apiGetWilayas();
+
+            wilayas.forEach(w => {
+                const opt = document.createElement("option");
+                opt.value = `${w.code} - ${w.name}`;
+                opt.textContent = `${w.code} - ${w.name}`;
+                select.appendChild(opt);
+            });
+        }
+
+        function autoFillUserData() {
+            const user = getLoggedInUser();
+            if (!user) return;
+
+            if (user.name && !document.getElementById("custName").value) {
+                document.getElementById("custName").value = user.name;
+            }
+            if (user.phone && !document.getElementById("custPhone").value) {
+                document.getElementById("custPhone").value = user.phone;
+            }
+            if (user.address && !document.getElementById("custAddress").value) {
+                document.getElementById("custAddress").value = user.address;
+            }
+            if (user.wilaya) {
+                const sel = document.getElementById("custWilaya");
+                for (let i = 0; i < sel.options.length; i++) {
+                    if (sel.options[i].text.includes(user.wilaya) || sel.options[i].value.includes(user.wilaya)) {
+                        sel.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+
+        window.autoFillUserCheckout = autoFillUserData;
+
+        async function handleWhatsAppCheckoutSubmit(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById("submitOrderBtn");
+            const cart = getCart();
+
+            if (cart.length === 0) {
+                showToast("السلة فارغة", "error");
+                return;
+            }
+
+            const name = document.getElementById("custName").value.trim();
+            const phone = document.getElementById("custPhone").value.trim();
+            const wilaya = document.getElementById("custWilaya").value;
+            const commune = document.getElementById("custCommune").value.trim();
+            const address = document.getElementById("custAddress").value.trim();
+            const notes = document.getElementById("custNotes").value.trim();
+
+            if (!name || !phone || !wilaya || !commune || !address) {
+                showToast("يرجى ملء جميع بيانات التوصيل", "error");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = "جاري تجهيز طلبك وفتح واتساب...";
+
+            try {
+                const orderPayload = {
+                    customer: {
+                        name,
+                        phone,
+                        wilaya,
+                        commune,
+                        address,
+                        notes
+                    },
+                    items: cart
+                };
+
+                const res = await apiPlaceOrder(orderPayload);
+                preparedWaLink = res.whatsappUrl;
+                preparedMessage = res.whatsappMessage;
+
+                // Clear cart on successful order
+                localStorage.removeItem(CART_STORAGE_KEY);
+                updateCartBadges();
+
+                // Open WhatsApp in new tab
+                window.open(preparedWaLink, "_blank");
+
+                // Show confirmation modal
+                const waModalBtn = document.getElementById("modalWhatsAppBtn");
+                if (waModalBtn) waModalBtn.href = preparedWaLink;
+                const msgPreviewEl = document.getElementById("modalMessagePreview");
+                if (msgPreviewEl) msgPreviewEl.textContent = preparedMessage;
+                const successModal = document.getElementById("orderSuccessModal");
+                if (successModal) successModal.style.display = "flex";
+            } catch (err) {
+                alert("حدث خطأ أثناء معالجة الطلب: " + err.message);
+                submitBtn.disabled = false;
+                submitBtn.textContent = "📲 إرسال الطلب ومعلوماتي عبر واتساب للبائع";
+            }
+        }
+
+        function copyOrderMessage() {
+            if (!preparedMessage) return;
+            navigator.clipboard.writeText(preparedMessage).then(() => {
+                showToast("تم نسخ نص الطلب بنجاح 📋", "success");
+            }).catch(() => {
+                showToast("تعذر النسخ تلقائياً، يمكنك نسخه من المربع", "info");
+            });
+        }
+    </script>
+</body>
+</html>

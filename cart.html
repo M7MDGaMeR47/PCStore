@@ -1,90 +1,190 @@
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سلة المشتريات | PC STORE - KHALIL TECH</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="top-bar-left">
+                <span>⚡ شحن سريع لـ 58 ولاية | الدفع عند استلام الطرد وفحصه</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="tel:0550123456" class="top-bar-link">📞 0550 12 34 56</a>
+                <a href="https://wa.me/213550123456" target="_blank" class="top-bar-link" style="color:#4ade80;">💬 واتساب المتجر</a>
+            </div>
+        </div>
+    </div>
 
-        <title>السلة | PC STORE</title>
+    <!-- Main Navigation Bar -->
+    <header class="navbar">
+        <div class="container navbar-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">⚡</div>
+                <div>
+                    PC<span>STORE</span>
+                    <span class="logo-sub">KHALIL TECH</span>
+                </div>
+            </a>
 
-        <link rel="stylesheet" href="css/style.css">
-    </head>
+            <nav class="nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="products.html">جميع المنتجات</a>
+                <a href="cart.html" style="color:var(--primary-light);">السلة</a>
+                <a href="admin.html" style="color:var(--primary-light); font-weight:700;">⚡ لوحة خليل تك</a>
+                <a href="index.html#contactSection">اتصل بنا</a>
+            </nav>
 
-    <body>
-        <!-- Navbar -->
-        <header class="navbar">
-            <div class="container navbar-content">
-                <a href="index.html" class="logo">PC<span>STORE</span></a>
+            <div class="nav-actions">
+                <a href="admin.html" class="btn btn-secondary btn-sm" style="font-size:12px; padding:6px 12px; white-space:nowrap;" title="بوابة خليل تك والمصمم">⚡ خليل تك</a>
+                <a href="cart.html" class="action-btn cart-btn" title="سلة المشتريات">
+                    🛒<span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
 
-                <nav class="nav-links">
+    <main style="padding: 40px 0 90px;">
+        <div class="container">
+            <div class="breadcrumbs">
+                <a href="index.html">الرئيسية</a>
+                <span>/</span>
+                <span style="color:#fff;">سلة المشتريات</span>
+            </div>
+
+            <div class="section-header" style="margin-bottom: 30px;">
+                <div>
+                    <p class="section-label">مشترياتك الحالية</p>
+                    <h1 class="section-title">سلة التسوق</h1>
+                </div>
+            </div>
+
+            <!-- Active Cart Layout -->
+            <div class="cart-layout" id="cartLayoutContainer">
+                <!-- Cart Items List -->
+                <div class="cart-items-list" id="cartItemsList">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Order Summary Box -->
+                <aside class="order-summary-box">
+                    <h2 class="summary-heading">ملخص سلة المشتريات</h2>
+
+                    <div class="summary-line">
+                        <span>إجمالي المنتجات:</span>
+                        <strong id="cartSummarySubtotal">0 DA</strong>
+                    </div>
+
+                    <div class="summary-line">
+                        <span>سعر التوصيل:</span>
+                        <span style="font-size:13px; color:var(--text-dim);">يُحسب حسب الولاية عند الدفع</span>
+                    </div>
+
+                    <div class="delivery-badge-note" style="margin: 15px 0;">
+                        <span>🚚</span>
+                        <span>شحن آمن لـ 58 ولاية مع إمكانية فحص القطع قبل الدفع.</span>
+                    </div>
+
+                    <div class="summary-line total">
+                        <span>المجموع المقدر:</span>
+                        <strong id="cartSummaryTotal">0 DA</strong>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:10px; margin-top:25px;">
+                        <a href="checkout.html" class="btn btn-success" style="width:100%; padding:15px; background:#22c55e; border-color:#22c55e; font-size:16px;">
+                            📲 إرسال الطلب عبر واتساب للبائع ←
+                        </a>
+                        <a href="products.html" class="btn btn-secondary" style="width:100%;">
+                            + إضافة المزيد من القطع
+                        </a>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Empty Cart State -->
+            <div class="no-products-state" id="emptyCartState" style="display: none; padding: 80px 20px;">
+                <div class="icon" style="font-size: 64px; margin-bottom: 20px;">🛒</div>
+                <h2 style="font-size: 24px; font-weight: 900; margin-bottom: 10px;">سلة مشترياتك فارغة</h2>
+                <p style="color: var(--text-muted); max-width: 420px; margin-inline: auto; margin-bottom: 30px;">
+                    لم تقم بإضافة أي أجهزة كمبيوتر أو قطع هاردوير إلى سلتك حتى الآن.
+                </p>
+                <a href="products.html" class="btn btn-primary btn-lg">تصفح كتالوج أجهزة وقطع PC ⚡</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2026 PC STORE - KHALIL TECH. جميع الحقوق محفوظة.</p>
+                <div style="display:flex; gap:15px;">
                     <a href="index.html">الرئيسية</a>
                     <a href="products.html">المنتجات</a>
-                    <a href="#">العروض</a>
-                    <a href="#">اتصل بنا</a>
-                </nav>
-
-                <div class="nav-actions">
-                    <a href="cart.html" class="cart-btn">🛒<span class="cart-count">0</span></a>
+                    <a href="admin.html" style="color:var(--primary-light);">⚡ لوحة تحكم خليل تك (دخول المالك)</a>
+                    <a href="https://wa.me/213550123456" target="_blank">واتساب</a>
                 </div>
             </div>
-        </header>
+        </div>
+    </footer>
 
-        <!-- Cart -->
-        <main>
-            <section class="cart-page">
-                <div class="container">
-                    <div class="page-heading">
-                        <p class="section-label">طلبك</p>
-                        <h1>سلة المشتريات</h1>
+    <!-- Core Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        function renderCartPage() {
+            const cart = getCart();
+            const layout = document.getElementById("cartLayoutContainer");
+            const empty = document.getElementById("emptyCartState");
+            const list = document.getElementById("cartItemsList");
+            const subtotalEl = document.getElementById("cartSummarySubtotal");
+            const totalEl = document.getElementById("cartSummaryTotal");
+
+            if (cart.length === 0) {
+                if (layout) layout.style.display = "none";
+                if (empty) empty.style.display = "block";
+                return;
+            }
+
+            if (layout) layout.style.display = "grid";
+            if (empty) empty.style.display = "none";
+
+            const subtotal = getCartSubtotal();
+            if (subtotalEl) subtotalEl.textContent = formatDinar(subtotal);
+            if (totalEl) totalEl.textContent = formatDinar(subtotal);
+
+            if (list) {
+                list.innerHTML = cart.map(item => `
+                    <div class="cart-item-card">
+                        <div class="cart-item-thumb">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="cart-item-info">
+                            <span style="font-size:11px; color:var(--primary-light); font-weight:700; text-transform:uppercase;">${item.category || ""}</span>
+                            <h4>${item.name}</h4>
+                            <div class="cart-item-price">${formatDinar(item.price)} للقطعة</div>
+                        </div>
+                        <div class="qty-stepper">
+                            <button onclick="updateCartItemQty(${item.id}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateCartItemQty(${item.id}, 1)">+</button>
+                        </div>
+                        <div style="font-size:16px; font-weight:900; color:#fff; min-width:100px; text-align:left;">
+                            ${formatDinar(item.price * item.quantity)}
+                        </div>
+                        <button class="cart-item-remove" onclick="removeCartItem(${item.id})" title="حذف من السلة">🗑️</button>
                     </div>
+                `).join("");
+            }
+        }
 
-                    <div class="cart-layout">
-                        <!-- Cart Products -->
-                        <div class="cart-items" id="cartItems"></div>
-
-                        <!-- Summary -->
-                        <aside class="cart-summary">
-                            <h2>ملخص الطلب</h2>
-
-                            <div class="summary-row">
-                                <span>المنتجات</span>
-                                <strong id="cartSubtotal">0DA</strong>
-                            </div>
-
-                            <div class="summary-row">
-                                <span>التوصيل</span>
-                                <strong>يحسب لاحقًا</strong>
-                            </div>
-
-                            <hr>
-
-                            <div class="summary-total">
-                                <span>المجموع</span>
-                                <strong id="cartTotal">0DA</strong>
-                            </div>
-
-                            <button class="checkout-btn" id="checkoutBtn">متابعة الطلب</button>
-                        </aside>
-                    </div>
-
-                    <!-- Empty Cart -->
-                    <div class="empty-cart" id="emptyCart">
-                        <div>🛒</div>
-                        <h2>السلة فارغة</h2>
-                        <p>لم تضف أي منتجات إلى السلة بعد.</p>
-                        <a href="products.html" class="btn primary">تصفح المنتجات</a>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-bottom">© 2026 PC STORE</div>
-            </div>
-        </footer>
-
-        <script src="js/products.js"></script>
-        <script src="js/cart.js"></script>
-    </body>
+        document.addEventListener("DOMContentLoaded", renderCartPage);
+        window.addEventListener("cartUpdated", renderCartPage);
+    </script>
+</body>
 </html>

@@ -1,98 +1,159 @@
-/*
-Categories: PCs(Full PC), GPU, CPU, RAM, Controller, Laptops, PCs, HDD, SSD
-Badge: جديد, مستعمل, تم بيع
-*/
+/* ==========================================================================
+   PC STORE - KHALIL TECH | PRODUCTS & API CLIENT
+   ========================================================================== */
 
-const categories = [
-    "PC",
-    "GPU",
-    "CPU",
-    "RAM",
-    "Controller",
-    "Laptops",
-    "HDD",
-    "SSD"
-];
+const API_BASE = "/api";
 
-const products = [
-    {
-        id: 1,
-        name: "Gaming PC Ryzen 5",
-        category: "PC",
-        price: 185000,
-        image: "image/pc1.jpg",
-        description: "Ryzen 5 | 16GB RAM | 1TB SSD",
-        badge: "جديد",
-        badgeType: "new"
-    },
-    {
-        id: 2,
-        name: "RTX 2070",
-        category: "GPU",
-        price: 78500,
-        image: "image/gpu1.jpg",
-        description: "8GB | RGB | GDDR6",
-        badge: "مستعمل",
-        badgeType: "used"
-    },
-    {
-        id: 3,
-        name: "Laptop ASUS",
-        category: "Laptops",
-        price: 104000,
-        image: "image/laptops1.jpg",
-        description: "16GB | RTX 3050 | 500gb SSD NVME",
-        badge: "جديد",
-        badgeType: "new"
-    },  
-    {
-        id: 4,
-        name: "Ryzen 5 3600",
-        category: "CPU",
-        price: 14500,
-        image: "image/cpu1.jpg",
-        description: "6 Cores | 12 Threads | 32MB L3 Cache",
-        badge: "جديد",
-        badgeType: "new"
-    },  
-    {
-        id: 5,
-        name: "16GB DDR4 HyperX",
-        category: "RAM",
-        price: 16000,
-        image: "image/ram1.jpg",
-        description: "DDR4 | 3600MHZ",
-        badge: "جديد",
-        badgeType: "new"
-    },  
-    {
-        id: 6,
-        name: "Controller XBOX",
-        category: "Controller",
-        price: 7500,
-        image: "image/controller1.jpg",
-        description: "Xbox Series X",
-        badge: "تم بيع",
-        badgeType: "sell"
-    },  
-    {
-        id: 7,
-        name: "HDD 500GB + Games",
-        category: "HDD",
-        price: 3500,
-        image: "image/hdd1.jpg",
-        description: "500GB | 9 Games",
-        badge: "مستعمل",
-        badgeType: "used"
-    },  
-    {
-        id: 8,
-        name: "SSD 1TB",
-        category: "SSD",
-        price: 13000,
-        image: "image/ssd1.jpg",
-        description: "SSD | SATA",
-        badge: "جديد",
-        badgeType: "new"
-    },  
-]
+// Empty fallback products - products are entered dynamically by Khalil Tech
+const fallbackProducts = [];
+
+// Provide global variable
+let products = [];
+
+// Fetch products from REST API
+async function apiGetProducts(params = {}) {
+    const query = new URLSearchParams(params).toString();
+    try {
+        const res = await fetch(`${API_BASE}/products${query ? "?" + query : ""}`);
+        if (res.ok) {
+            const data = await res.json();
+            products = data;
+            return data;
+        }
+    } catch (err) {
+        console.warn("API fetch products failed:", err);
+    }
+    return products;
+}
+
+// Fetch single product
+async function apiGetProduct(id) {
+    try {
+        const res = await fetch(`${API_BASE}/products/${id}`);
+        if (res.ok) {
+            return await res.json();
+        }
+    } catch (err) {
+        console.warn("API fetch product failed, using local lookup:", err);
+    }
+    return products.find(p => p.id === Number(id)) || null;
+}
+
+// Fetch categories
+async function apiGetCategories() {
+    try {
+        const res = await fetch(`${API_BASE}/categories`);
+        if (res.ok) {
+            return await res.json();
+        }
+    } catch (err) {
+        console.warn("API fetch categories failed:", err);
+    }
+    return [
+        { id: "PC", name: "أجهزة كمبيوتر", icon: "🖥️", count: 2 },
+        { id: "GPU", name: "كروت الشاشة", icon: "⚡", count: 2 },
+        { id: "CPU", name: "المعالجات", icon: "🧠", count: 1 },
+        { id: "RAM", name: "الرامات", icon: "⚡", count: 1 },
+        { id: "Controller", name: "أذرع التحكم", icon: "🎮", count: 1 },
+        { id: "Laptops", name: "لابتوبات", icon: "💻", count: 1 },
+        { id: "HDD", name: "أقراص HDD", icon: "💾", count: 1 },
+        { id: "SSD", name: "وحدات SSD", icon: "🚀", count: 1 }
+    ];
+}
+
+// Fetch Wilayas and delivery rates
+async function apiGetWilayas() {
+    try {
+        const res = await fetch(`${API_BASE}/wilayas`);
+        if (res.ok) {
+            return await res.json();
+        }
+    } catch (err) {
+        console.warn("API fetch wilayas failed:", err);
+    }
+    return [];
+}
+
+// Place Order
+async function apiPlaceOrder(orderData) {
+    const res = await fetch(`${API_BASE}/orders`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
+    });
+    const data = await res.json();
+    if (!res.ok) {
+        throw new Error(data.error || "فشل في تسجيل الطلب");
+    }
+    return data;
+}
+
+// Track Order
+async function apiTrackOrder(orderCode, phone = "") {
+    const query = new URLSearchParams({ orderCode, phone }).toString();
+    const res = await fetch(`${API_BASE}/orders/track?${query}`);
+    const data = await res.json();
+    if (!res.ok) {
+        throw new Error(data.error || "لم يتم العثور على الطلب");
+    }
+    return data;
+}
+
+// Render reusable Product Card HTML
+function createProductCardHtml(product) {
+    // Determine badge styling & text
+    let badgeClass = "badge-new";
+    let badgeText = product.badge || "جديد";
+    if (product.badge === "مستعمل" || product.badgeType === "used") {
+        badgeClass = "badge-used";
+    } else if (product.badge === "العرض" || product.badgeType === "offer") {
+        badgeClass = "badge-offer";
+    } else if (product.stock === 0) {
+        badgeClass = "badge-out";
+        badgeText = "غير متوفر";
+    }
+
+    // Calculate discount if old price exists
+    let discountHtml = "";
+    if (product.oldPrice && product.oldPrice > product.price) {
+        const percent = Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100);
+        discountHtml = `<span class="discount-pill">-${percent}%</span>`;
+    }
+
+    // Stock tag
+    let stockTagHtml = "";
+    if (product.stock <= 0) {
+        stockTagHtml = `<span class="stock-indicator out-of-stock"><span class="stock-dot"></span> نفذ من المخزون</span>`;
+    } else if (product.stock <= 2) {
+        stockTagHtml = `<span class="stock-indicator low-stock"><span class="stock-dot"></span> متبقي ${product.stock} فقط</span>`;
+    } else {
+        stockTagHtml = `<span class="stock-indicator in-stock"><span class="stock-dot"></span> متوفر في المحل</span>`;
+    }
+
+    const disabledAttr = product.stock <= 0 ? "disabled" : "";
+
+    return `
+        <article class="product-card" onclick="if(!event.target.closest('.add-cart-btn')) window.location.href='product.html?id=${product.id}'">
+            <div class="product-image-wrap">
+                <span class="product-badge-overlay badge ${badgeClass}">${badgeText}</span>
+                ${discountHtml ? `<div class="product-discount-overlay">${discountHtml}</div>` : ""}
+                <img src="${product.image}" alt="${product.name}" loading="lazy">
+            </div>
+            <div class="product-body">
+                <span class="product-category-name">${product.category}</span>
+                <h3 class="product-title">${product.name}</h3>
+                <p class="product-desc">${product.description || ""}</p>
+                <div class="product-pricing">
+                    <span class="price-current">${formatDinar(product.price)}</span>
+                    ${product.oldPrice ? `<span class="price-old">${formatDinar(product.oldPrice)}</span>` : ""}
+                </div>
+                <div class="product-card-footer">
+                    ${stockTagHtml}
+                    <button class="add-cart-btn" ${disabledAttr} title="أضف إلى السلة" onclick="event.stopPropagation(); addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                        🛒
+                    </button>
+                </div>
+            </div>
+        </article>
+    `;
+}

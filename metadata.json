@@ -1,0 +1,10 @@
+{
+  "name": "PC STORE - KHALIL TECH",
+  "description": "متجر أجهزة كمبيوتر ولابتوبات واكسسوارات الألعاب وبأسعار تنافسية",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

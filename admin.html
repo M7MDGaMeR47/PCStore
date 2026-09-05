@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم المتجر | PC STORE - KHALIL TECH</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-nav {
+            display: flex;
+            gap: 12px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+        }
+        .admin-nav-btn {
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .admin-nav-btn:hover, .admin-nav-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 22px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .stat-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: var(--radius-sm);
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+        .admin-table-wrap {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            font-size: 14px;
+        }
+        .admin-table th {
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid var(--border-color);
+            padding: 14px 18px;
+            font-weight: 800;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .admin-table td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 14px 18px;
+            vertical-align: middle;
+        }
+        .admin-table tr:hover {
+            background: rgba(255, 255, 255, 0.015);
+        }
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            width: min(700px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Navigation Bar -->
+    <header class="navbar">
+        <div class="container navbar-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">⚡</div>
+                <div>
+                    PC<span>STORE</span>
+                    <span class="logo-sub">لوحة إدارة المتجر</span>
+                </div>
+            </a>
+
+            <div class="nav-actions">
+                <a href="index.html" class="btn btn-secondary btn-sm" target="_blank">🌐 تصفح المتجر الحي</a>
+                <button id="logoutBtn" class="btn btn-danger btn-sm" style="display:none;">تسجيل الخروج</button>
+            </div>
+        </div>
+    </header>
+
+    <main style="padding: 40px 0 80px;">
+        <div class="container">
+            <!-- LOGIN VIEW (Shown if not logged in) -->
+            <div id="adminLoginSection" style="max-width: 480px; margin: 40px auto; background: var(--bg-card); padding: 35px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5);">
+                <!-- Portal Switch Buttons -->
+                <div style="display:flex; background:rgba(255,255,255,0.05); padding:4px; border-radius:8px; margin-bottom:24px;">
+                    <button id="switchKhalilLoginBtn" type="button" class="btn btn-sm" style="flex:1; background:var(--primary); color:#fff; border-radius:6px; font-weight:700;" onclick="switchLoginTab('khalil')">
+                        ⚡ دخول خليل تك
+                    </button>
+                    <button id="switchDesignerLoginBtn" type="button" class="btn btn-sm" style="flex:1; background:transparent; color:var(--text-dim); border-radius:6px; font-weight:700;" onclick="switchLoginTab('designer')">
+                        🛠️ بوابة مصمم ومسؤول الموقع
+                    </button>
+                </div>
+
+                <!-- TAB 1: KHALIL TECH CASH ACTIVATION & LOGIN -->
+                <div id="khalilLoginFormWrap">
+                    <div style="font-size: 44px; margin-bottom: 12px;">⚡</div>
+                    <span class="badge badge-new" style="margin-bottom:10px; font-size:12px;">بوابة خليل تك (KHALIL TECH)</span>
+                    <h2 style="font-size: 22px; font-weight: 900; margin-bottom: 8px;">إدارة المتجر والمنتجات</h2>
+                    <p style="color: var(--text-muted); font-size: 13px; line-height:1.6; margin-bottom: 22px;">
+                        المتجر مخصص حصرياً لخليل تك. أدخل كود الترخيص والتفعيل الذي استلمته بعد الدفع كاش لمصمم الموقع لبدء إضافة وإدارة منتجاتك.
+                    </p>
+
+                    <form id="khalilLicenseForm" style="display: flex; flex-direction: column; gap: 16px; text-align: right;">
+                        <div class="form-group">
+                            <label style="font-weight:700; color:#fff;">🔑 كود التفعيل / الترخيص المدفوع كاش</label>
+                            <input type="text" id="khalilLicenseInput" class="form-control" placeholder="مثال: KHALIL-TECH-2026-CASH" value="KHALIL-TECH-2026-CASH" style="font-family:monospace; font-size:15px; font-weight:700; letter-spacing:1px; text-transform:uppercase;" required>
+                            <small style="color:var(--text-dim); font-size:11px;">الكود الافتراضي المعتمد جاهز ومفعل تلقائياً.</small>
+                        </div>
+                        <div class="form-group">
+                            <label>كلمة المرور (اختياري)</label>
+                            <input type="password" id="khalilPasswordInput" class="form-control" placeholder="كلمة المرور الخاصة بك" value="admin123">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 6px; width: 100%; font-size:15px; padding:12px;">
+                            🚀 تفعيل ودخول لوحة تحكم خليل تك
+                        </button>
+                    </form>
+
+                    <div style="margin-top:20px; padding:12px; background:rgba(34, 197, 94, 0.08); border:1px solid rgba(34, 197, 94, 0.2); border-radius:8px; text-align:right;">
+                        <div style="font-size:12px; font-weight:700; color:#4ade80; margin-bottom:4px;">💵 نظام الدفع والاشتراك:</div>
+                        <div style="font-size:11px; color:var(--text-muted); line-height:1.6;">
+                            يتم تسليم كود التفعيل يداً بيد أو عبر اتصال بعد استلام المبلغ كاش من قِبل مسؤول ومصمم الموقع.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: DESIGNER / WEBMASTER MASTER LOGIN -->
+                <div id="designerLoginFormWrap" style="display: none;">
+                    <div style="font-size: 44px; margin-bottom: 12px;">🛠️</div>
+                    <span class="badge badge-offer" style="margin-bottom:10px; font-size:12px;">المصمم ومسؤول النظام</span>
+                    <h2 style="font-size: 22px; font-weight: 900; margin-bottom: 8px;">بوابة إدارة التراخيص كاش</h2>
+                    <p style="color: var(--text-muted); font-size: 13px; line-height:1.6; margin-bottom: 22px;">
+                        هذه اللوحة خاصة بك (مصمم ومسؤول الموقع) لتوليد أكواد التفعيل لخليل تك بعد استلام المال كاش ومتابعة حالة التراخيص.
+                    </p>
+
+                    <form id="designerLoginForm" style="display: flex; flex-direction: column; gap: 16px; text-align: right;">
+                        <div class="form-group">
+                            <label style="font-weight:700; color:#fff;">كلمة مرور المصمم (Master Password)</label>
+                            <input type="password" id="designerPassInput" class="form-control" placeholder="أدخل كلمة مرور المصمم..." value="designer2026" required>
+                            <small style="color:var(--text-dim); font-size:11px;">كلمة المرور الافتراضية للمصمم: designer2026</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 6px; width: 100%; font-size:15px; padding:12px; background:#f59e0b; border-color:#f59e0b; color:#000;">
+                            🔑 دخول بوابة المصمم والأكواد
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- DESIGNER DASHBOARD (Shown when designer logs in) -->
+            <div id="designerDashboardSection" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; border-bottom:1px solid var(--border-color); padding-bottom:20px;">
+                    <div>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <h1 style="font-size: 26px; font-weight: 900; margin:0;">لوحة مصمم ومسؤول الموقع</h1>
+                            <span class="badge badge-offer" style="background:#f59e0b; color:#000; font-weight:800;">Webmaster / Creator</span>
+                        </div>
+                        <p style="color: var(--text-dim); font-size: 14px; margin-top:5px;">إدارة التراخيص والأكواد المدفوعة كاش من قِبل خليل تك.</p>
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <button onclick="openGenerateLicenseModal()" class="btn btn-primary" style="background:#22c55e; border-color:#22c55e;">
+                            + توليد كود ترخيص كاش جديد
+                        </button>
+                        <button onclick="logoutAdmin()" class="btn btn-secondary btn-sm">خروج</button>
+                    </div>
+                </div>
+
+                <!-- Designer Licenses Table -->
+                <div class="admin-table-wrap" style="margin-bottom:30px;">
+                    <div style="padding:15px 20px; background:rgba(255,255,255,0.02); border-bottom:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
+                        <h3 style="font-size:16px; font-weight:800; margin:0;">الأكواد المسجلة في النظام (تُسلّم لخليل تك مقابل كاش)</h3>
+                        <button onclick="loadDesignerLicenses()" class="btn btn-secondary btn-sm">تحديث ↺</button>
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>كود الترخيص</th>
+                                <th>المستفيد (المشتري)</th>
+                                <th>حالة الدفع</th>
+                                <th>حالة التفعيل</th>
+                                <th>تاريخ الإنشاء</th>
+                                <th>ملاحظات المصمم</th>
+                                <th>الإجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody id="designerLicensesTableBody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- DASHBOARD VIEW (Shown once Khalil Tech logs in) -->
+            <div id="adminDashboardSection" style="display: none;">
+                <!-- Header Title & Action -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                            <h1 style="font-size: 26px; font-weight: 900; margin:0;">لوحة تحكم خليل تك (KHALIL TECH)</h1>
+                            <span class="badge badge-offer" style="background:#22c55e; color:#052e16; font-size:12px; font-weight:700;">✅ ترخيص معتمد: مدفوع كاش</span>
+                        </div>
+                        <p style="color: var(--text-dim); font-size: 14px; margin-top:5px;">أهلاً بك يا خليل تك! أضف منتجاتك الجديدة، سجل مواصفاتها بصوتك، وتابع طلبات زبائنك.</p>
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <button id="openAddProductModalBtn" class="btn btn-primary" style="font-size:15px; padding:10px 20px;">
+                            + إضافة منتج / قطعة جديدة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Overview Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="color:var(--primary-light);">📦</div>
+                        <div>
+                            <div class="stat-value" id="statTotalOrders">0</div>
+                            <div class="stat-label">إجمالي الطلبات الواردة</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="color:#10b981;">🖥️</div>
+                        <div>
+                            <div class="stat-value" id="statTotalProducts">0</div>
+                            <div class="stat-label">المنتجات المعروضة</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="color:#f59e0b;">⏳</div>
+                        <div>
+                            <div class="stat-value" id="statPendingOrders">0</div>
+                            <div class="stat-label">طلبات تنتظر التأكيد في واتساب</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="color:#38bdf8;">💵</div>
+                        <div>
+                            <div class="stat-value" id="statTotalSales">0 DA</div>
+                            <div class="stat-label">إجمالي قيمة الطلبات</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <div class="admin-nav">
+                    <button class="admin-nav-btn active" data-tab="productsTab">🖥️ كتالوج المنتجات والمخزون</button>
+                    <button class="admin-nav-btn" data-tab="ordersTab">📦 إدارة الطلبات الواردة</button>
+                    <button class="admin-nav-btn" data-tab="deliveryTab">🚚 أسعار توصيل الولايات</button>
+                    <button class="admin-nav-btn" data-tab="settingsTab">⚙️ إعدادات المتجر والتواصل</button>
+                    <button class="admin-nav-btn" data-tab="licenseInfoTab">🔑 بيانات الترخيص كاش</button>
+                </div>
+
+                <!-- TAB: PRODUCTS MANAGEMENT (First & Primary) -->
+                <div id="productsTab" class="admin-tab-content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                        <div>
+                            <h3 style="font-size: 18px; font-weight: 800; margin-bottom:4px;">قائمة المنتجات والتجميعات</h3>
+                            <p style="color:var(--text-dim); font-size:13px; margin:0;">أضف أجهزتك وقطعك وسجل شرحاً صوتياً بالمايكروفون ليسمعه الزبائن.</p>
+                        </div>
+                        <div style="display:flex; gap:10px;">
+                            <input type="text" id="adminProductSearch" class="form-control" placeholder="ابحث بالاسم..." style="max-width: 220px;">
+                            <button onclick="openProductModal()" class="btn btn-primary btn-sm">+ إضافة منتج</button>
+                        </div>
+                    </div>
+
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>الصورة</th>
+                                    <th>الاسم</th>
+                                    <th>الفئة</th>
+                                    <th>السعر</th>
+                                    <th>النوع / عرض</th>
+                                    <th>تسجيل صوتي</th>
+                                    <th>المخزون</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminProductsTableBody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB: ORDERS MANAGEMENT -->
+                <div id="ordersTab" class="admin-tab-content" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                        <div>
+                            <h3 style="font-size: 18px; font-weight: 800; margin-bottom:4px;">الطلبات الواردة من الزبائن</h3>
+                            <p style="color:var(--text-dim); font-size:13px; margin:0;">تصلك هذه الطلبات مباشرة إلى واتساب مع رسائل وملاحظات الزبائن.</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <select id="adminOrderFilter" class="filter-select">
+                                <option value="all">جميع الحالات</option>
+                                <option value="تم استلام الطلب">تم استلام الطلب</option>
+                                <option value="تم تأكيد الطلب">تم تأكيد الطلب</option>
+                                <option value="قيد التحضير">قيد التحضير</option>
+                                <option value="خرج للتوصيل">خرج للتوصيل</option>
+                                <option value="تم التوصيل">تم التوصيل</option>
+                                <option value="ملغى">ملغى</option>
+                            </select>
+                            <button onclick="loadAdminOrders()" class="btn btn-secondary btn-sm">تحديث ↺</button>
+                        </div>
+                    </div>
+
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>رقم الطلب</th>
+                                    <th>اسم الزبون</th>
+                                    <th>الهاتف</th>
+                                    <th>الولاية والبلدية</th>
+                                    <th>القطع المطلوبة</th>
+                                    <th>المبلغ الإجمالي</th>
+                                    <th>رسالة الزبون</th>
+                                    <th>الحالة</th>
+                                    <th>إجراءات وتواصل</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminOrdersTableBody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB: LICENSE INFO -->
+                <div id="licenseInfoTab" class="admin-tab-content" style="display: none;">
+                    <div style="max-width: 600px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 30px;">
+                        <div style="font-size:32px; margin-bottom:12px;">🛡️</div>
+                        <h3 style="font-size: 20px; font-weight: 900; margin-bottom: 8px;">بيانات ترخيص المتجر المعتمد</h3>
+                        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">
+                            هذا الحساب مرخص ومفعل لخليل تك بعد الدفع كاش لمصمم ومسؤول الموقع.
+                        </p>
+
+                        <div style="display:flex; flex-direction:column; gap:12px; font-size:14px;">
+                            <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border-color);">
+                                <span style="color:var(--text-dim);">صاحب الحساب:</span>
+                                <strong id="licDisplayOwner">خليل تك (Khalil Tech)</strong>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border-color);">
+                                <span style="color:var(--text-dim);">كود الترخيص:</span>
+                                <code id="licDisplayCode" style="color:var(--primary-light); font-weight:800; font-size:15px;">KHALIL-TECH-2026-CASH</code>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border-color);">
+                                <span style="color:var(--text-dim);">طريقة الدفع:</span>
+                                <span class="badge badge-offer" style="background:#22c55e; color:#052e16;">كاش (مستلم من طرف المصمم)</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding:10px 0;">
+                                <span style="color:var(--text-dim);">حالة الحساب:</span>
+                                <span style="color:#4ade80; font-weight:700;">🟢 نشط ومعتمد رسمياً</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB 3: DELIVERY SETTINGS -->
+                <div id="deliveryTab" class="admin-tab-content" style="display: none;">
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">أسعار الشحن والتوصيل لـ 58 ولاية</h3>
+                        <p style="color: var(--text-muted); font-size: 14px;">
+                            يمكنك تعديل سعر التوصيل لأي ولاية جزائرية في أي وقت ليظهر فوراً للزبائن عند إتمام الطلب.
+                        </p>
+                    </div>
+
+                    <div class="admin-table-wrap" style="max-height: 520px; overflow-y: auto;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>رمز الولاية</th>
+                                    <th>اسم الولاية</th>
+                                    <th>سعر التوصيل (DA)</th>
+                                    <th>الحالة</th>
+                                    <th>إجراء</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminWilayasTableBody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB 4: STORE SETTINGS -->
+                <div id="settingsTab" class="admin-tab-content" style="display: none;">
+                    <div style="max-width: 650px; background: var(--bg-card); padding: 30px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                        <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+                            ⚙️ معلومات التواصل والهوية
+                        </h3>
+                        <form id="storeSettingsForm" style="display: flex; flex-direction: column; gap: 16px;">
+                            <div class="form-group">
+                                <label>اسم المتجر</label>
+                                <input type="text" id="settingStoreName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>رقم هاتف الاتصال</label>
+                                <input type="text" id="settingPhone" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>رقم الواتساب (بدون + أو مسافات)</label>
+                                <input type="text" id="settingWhatsapp" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>رابط صفحة Facebook</label>
+                                <input type="url" id="settingFacebook" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>شريط الإعلان أعلى الموقع</label>
+                                <input type="text" id="settingAnnouncement" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
+                                حفظ الإعدادات
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ADD / EDIT PRODUCT MODAL -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px;">
+                <h3 id="productModalTitle" style="font-size: 20px; font-weight: 900;">إضافة منتج جديد</h3>
+                <button onclick="closeProductModal()" style="font-size: 22px; color: var(--text-dim);">✕</button>
+            </div>
+
+            <form id="productForm" style="display: flex; flex-direction: column; gap: 16px;">
+                <input type="hidden" id="modalProductId">
+
+                <div class="form-group">
+                    <label>اسم المنتج والقطعة <span>*</span></label>
+                    <input type="text" id="modalProductName" class="form-control" placeholder="مثلاً: RTX 4060 Ti 8GB أو Gaming PC Core i5" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>الفئة (Category) <span>*</span></label>
+                        <select id="modalProductCategory" class="form-control" required>
+                            <option value="PC">أجهزة كمبيوتر (PC)</option>
+                            <option value="GPU">كروت شاشة (GPU)</option>
+                            <option value="CPU">معالجات (CPU)</option>
+                            <option value="RAM">رامات (RAM)</option>
+                            <option value="Controller">أذرع تحكم (Controller)</option>
+                            <option value="Laptops">لابتوبات (Laptops)</option>
+                            <option value="SSD">وحدات تخزين (SSD)</option>
+                            <option value="HDD">أقراص صلبة (HDD)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>الـ Badge (الحالة) <span>*</span></label>
+                        <select id="modalProductBadge" class="form-control" required>
+                            <option value="جديد">جديد (أخضر)</option>
+                            <option value="مستعمل">مستعمل (برتقالي)</option>
+                            <option value="العرض">العرض / تخفيض (أحمر)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Offer Toggle Switch (isOffer) -->
+                <div style="background:rgba(239, 68, 68, 0.08); border:1px solid rgba(239, 68, 68, 0.3); border-radius:var(--radius-sm); padding:12px 16px; display:flex; align-items:center; justify-content:space-between;">
+                    <div>
+                        <strong style="color:#f87171; font-size:14px; display:block;">🔥 هل هذا المنتج عرض تخفيضي خاص؟</strong>
+                        <span style="font-size:12px; color:var(--text-dim);">عند التفعيل سيتم إبراز المنتج وتصنيفه ضمن العروض الخاصة للمتجر</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="modalProductIsOffer">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>السعر بالدينار الجزائري (DA) <span>*</span></label>
+                        <input type="number" id="modalProductPrice" class="form-control" placeholder="مثلاً: 68000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>السعر القديم قبل التخفيض (اختياري)</label>
+                        <input type="number" id="modalProductOldPrice" class="form-control" placeholder="مثلاً: 75000">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>الكمية المتوفرة في المخزون (Stock) <span>*</span></label>
+                        <input type="number" id="modalProductStock" class="form-control" value="1" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>الصورة الرئيسية <span>*</span></label>
+                        <div style="display:flex; gap:8px;">
+                            <input type="text" id="modalProductImage" class="form-control" placeholder="image/pc1.jpg أو رابط" required>
+                            <label class="btn btn-secondary btn-sm" style="white-space:nowrap; margin:0; cursor:pointer; display:flex; align-items:center;">
+                                📁 رفع
+                                <input type="file" id="modalImageFileInput" accept="image/*" style="display:none;" onchange="handleAdminImageUpload(event)">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Voice Note / Audio Explanation Section -->
+                <div style="background:rgba(59, 130, 246, 0.08); border:1px solid rgba(59, 130, 246, 0.3); border-radius:var(--radius-sm); padding:16px;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+                        <label style="color:#93c5fd; font-weight:800; font-size:14px; margin:0; display:flex; align-items:center; gap:8px;">
+                            🎙️ تسجيل صوتي لشرح القطعة (صوت صاحب المتجر)
+                        </label>
+                        <div style="display:flex; gap:6px;">
+                            <button type="button" id="recordAudioBtn" class="btn btn-outline btn-sm" onclick="toggleAudioRecording()">
+                                🔴 تسجيل بالمايك
+                            </button>
+                            <label class="btn btn-secondary btn-sm" style="margin:0; cursor:pointer;">
+                                📁 رفع صوت
+                                <input type="file" id="modalAudioFileInput" accept="audio/*" style="display:none;" onchange="handleAdminAudioUpload(event)">
+                            </label>
+                            <button type="button" id="clearAudioBtn" class="btn btn-danger btn-sm" style="display:none;" onclick="clearRecordedAudio()">
+                                ✕ حذف الصوت
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="recordingIndicator" style="display:none; color:#ef4444; font-size:13px; font-weight:700; margin-bottom:8px; animation:pulse 1s infinite;">
+                        🔴 جاري التسجيل الصوتي الآن... تحدث لشرح تفاصيل القطعة (اضغط الزر مرة أخرى لإنهاء وحفظ التسجيل)
+                    </div>
+
+                    <audio id="modalAudioPreviewPlayer" controls style="display:none; width:100%; height:36px; margin:8px 0;"></audio>
+
+                    <input type="text" id="modalProductAudioUrl" class="form-control" placeholder="رابط التسجيل الصوتي أو سيتم حفظه تلقائياً عند التسجيل" style="font-size:12px;">
+                </div>
+
+                <div class="form-group">
+                    <label>الوصف المختصر للمنتج</label>
+                    <textarea id="modalProductDesc" class="form-control" rows="2" placeholder="وصف حالة القطعة والميزات الرئيسية..."></textarea>
+                </div>
+
+                <!-- Custom Specifications Key-Values -->
+                <div class="form-group">
+                    <label>المواصفات التقنية (Specs JSON أو أسطر المفتاح:القيمة)</label>
+                    <textarea id="modalProductSpecs" class="form-control" rows="3" placeholder="مثال:&#10;الذاكرة: 8GB GDDR6&#10;المعالج: 6 Cores&#10;التردد: 3600MHz"></textarea>
+                    <span style="font-size: 11px; color: var(--text-dim);">اكتب كل مواصفة في سطر بالشكل (الاسم: القيمة) لتظهر بشكل جدول أنيق للزبون.</span>
+                </div>
+
+                <div style="display: flex; gap: 12px; margin-top: 15px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">نشر وحفظ المنتج</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeProductModal()">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- GENERATE NEW LICENSE MODAL (For Designer / Webmaster) -->
+    <div class="modal-overlay" id="generateLicenseModal">
+        <div class="modal-card" style="max-width: 520px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px;">
+                <h3 style="font-size: 18px; font-weight: 900; color:#f59e0b;">+ توليد كود ترخيص كاش جديد لخليل تك</h3>
+                <button onclick="closeGenerateLicenseModal()" style="font-size: 22px; color: var(--text-dim);">✕</button>
+            </div>
+
+            <form id="generateLicenseForm" style="display: flex; flex-direction: column; gap: 16px;">
+                <div class="form-group">
+                    <label>اسم المشتري / المتجر <span>*</span></label>
+                    <input type="text" id="newLicIssuedTo" class="form-control" value="خليل تك (Khalil Tech)" required>
+                </div>
+
+                <div class="form-group">
+                    <label>حالة استلام المبلغ</label>
+                    <input type="text" id="newLicPaymentType" class="form-control" value="Cash (تم الاستلام كاش يداً بيد للمصمم)" required>
+                </div>
+
+                <div class="form-group">
+                    <label>ملاحظات إضافية</label>
+                    <textarea id="newLicNotes" class="form-control" rows="2" placeholder="ملاحظة حول مدة الترخيص أو مكان التسليم..."></textarea>
+                </div>
+
+                <div style="padding:12px; background:rgba(245, 158, 11, 0.08); border:1px solid rgba(245, 158, 11, 0.2); border-radius:8px; font-size:12px; color:var(--text-muted); line-height:1.5;">
+                    💡 سيتم توليد كود فريد بصيغة <code style="color:#fbbf24;">KT-CASH-XXXX</code>. يمكنك نسخه مباشرة وإرساله لخليل تك ليدخل به إلى حسابه.
+                </div>
+
+                <div style="display: flex; gap: 12px; margin-top: 10px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1; background:#22c55e; border-color:#22c55e;">توليد وحفظ الكود</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeGenerateLicenseModal()">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

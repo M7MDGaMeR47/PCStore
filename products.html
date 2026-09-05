@@ -1,98 +1,163 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>المنتجات | PC STORE</title>
-
+    <title>كتالوج المنتجات وقطع الـ PC | PC STORE</title>
+    <meta name="description" content="تصفح قائمة أجهزة الكمبيوتر، كروت الشاشة، المعالجات، واللابتوبات مع فلاتر حسب الفئة والحالة والسعر.">
     <link rel="stylesheet" href="css/style.css">
 </head>
-    <body>
-        <!-- Navbar -->
-        <header class="navbar">
-            <div class="container navbar-content">
-                <a href="index.html" class="logo">PC<span>STORE</span></a>
-
-                <nav class="nav-links">
-                    <a href="index.html">الرئيسية</a>
-                    <a href="products.html" class="active">المنتجات</a>
-                    <a href="#">العروض</a>
-                    <a href="#">اتصل بنا</a>
-                </nav>
-
-                <div class="nav-actions">
-                    <button class="search-btn">🔍</button>
-                    <button class="cart-btn">🛒<span class="cart-count">0</span></button>
-                </div>
+<body>
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="top-bar-left">
+                <span>⚡ هاردوير أصلي 100% | ضمان فحص وتجربة على جميع القطع</span>
             </div>
-        </header>
+            <div class="top-bar-right">
+                <a href="https://wa.me/213550123456" target="_blank" class="top-bar-link" style="color:#34d399;">💬 تواصل واتساب</a>
+                <a href="tel:0550123456" class="top-bar-link">📞 0550 12 34 56</a>
+            </div>
+        </div>
+    </div>
 
-        <!-- Products Page -->
-        <main>
-            <section class="products-page">
-                <div class="container">
-                    <div class="page-heading">
-                        <p class="section-label">منتجاتنا</p>
-                        <h1>جميع المنتجات</h1>
-                        <p>اكتشف أجهزة الكمبيوتر ومكوناتها وإكسسواراتها.</p>
-                    </div>
-
-                    <!-- Filters -->
-                    <div class="products-filters">
-                        <div class="search-box">
-                            <input type="text" id="productSearch" placeholder="ابحث عن منتج...">
-                            <span>🔍</span>
-                        </div>
-
-                        <select id="categoryFilter">
-                            <option value="all">جميع الفئات</option>
-                            <option value="PC">PCs (Full PC)</option>
-                            <option value="GPU">GPU</option>
-                            <option value="CPU">CPU</option>
-                            <option value="RAM">RAM</option>
-                            <option value="Controller">Controller</option>
-                            <option value="Laptops">Laptops</option>
-                            <option value="HDD">HDD</option>
-                            <option value="SSD">SSD</option>
-                        </select>
-
-                        <select id="priceSort">
-                            <option value="default">ترتيب حسب</option>
-                            <option value="low">السعر: من الأقل للأعلى</option>
-                            <option value="high">السعر: من الأعلى للأقل</option>
-                        </select>
-                    </div>
-
-
-                    <!-- Products -->
-                    <div class="products-grid" id="productsPage"></div>
-
-                    <!-- No Products -->
-                    <div class="no-products" id="noProducts">
-                        <span>🔎</span>
-                        <h3>لم نجد أي منتج</h3>
-                        <p>جرب تغيير البحث أو الفئة</p>
-                    </div>
+    <!-- Main Navigation Bar -->
+    <header class="navbar">
+        <div class="container navbar-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">⚡</div>
+                <div>
+                    PC<span>STORE</span>
+                    <span class="logo-sub">KHALIL TECH</span>
                 </div>
-            </section>
-        </main>
+            </a>
 
-        <!-- Footer -->
-        <footer class="footer">
+            <nav class="nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="products.html" class="active">جميع المنتجات</a>
+                <a href="products.html?badge=offer" style="color:#f87171;">🔥 العروض</a>
+                <a href="index.html#categoriesSection">الفئات</a>
+                <a href="admin.html" style="color:var(--primary-light); font-weight:700;">⚡ لوحة خليل تك</a>
+                <a href="index.html#contactSection">اتصل بنا</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="admin.html" class="btn btn-secondary btn-sm" style="font-size:12px; padding:6px 12px; white-space:nowrap;" title="بوابة خليل تك والمصمم">⚡ خليل تك</a>
+                <button class="action-btn search-btn" title="بحث سريع (Ctrl+K)">🔍</button>
+                <a href="cart.html" class="action-btn cart-btn" title="سلة المشتريات">
+                    🛒<span class="cart-count">0</span>
+                </a>
+                <button class="action-btn hamburger-btn">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="catalog-header">
             <div class="container">
-                <div class="footer-content">
-                    <div>
-                        <a href="index.html" class="logo">PC<span>STORE</span></a>
-                        <p>كل ما تحتاجه لعالم الكمبيوتر والألعاب.</p>
+                <div class="breadcrumbs">
+                    <a href="index.html">الرئيسية</a>
+                    <span>/</span>
+                    <span style="color:#fff;">المنتجات</span>
+                </div>
+                <h1 style="font-size:32px; font-weight:900; margin-bottom:8px;">قائمة أجهزة الهاردوير والقطع</h1>
+                <p style="color:var(--text-muted); font-size:15px;">
+                    استخدم محرك البحث والفلاتر أدناه للوصول لأفضل جهاز أو قطعة تناسب ميزانيتك.
+                </p>
+            </div>
+        </div>
+
+        <section style="padding: 40px 0 80px;">
+            <div class="container">
+                <!-- Category Quick Filter Chips -->
+                <div class="category-chips" id="categoryChips">
+                    <button class="chip-btn active" data-category="all">الكل</button>
+                    <button class="chip-btn" data-category="PC">🖥️ أجهزة PC</button>
+                    <button class="chip-btn" data-category="GPU">⚡ كروت شاشة GPU</button>
+                    <button class="chip-btn" data-category="CPU">🧠 معالجات CPU</button>
+                    <button class="chip-btn" data-category="RAM">⚡ رامات RAM</button>
+                    <button class="chip-btn" data-category="Controller">🎮 أذرع تحكم</button>
+                    <button class="chip-btn" data-category="Laptops">💻 لابتوبات</button>
+                    <button class="chip-btn" data-category="SSD">🚀 وحدات SSD</button>
+                    <button class="chip-btn" data-category="HDD">💾 أقراص HDD</button>
+                </div>
+
+                <!-- Comprehensive Filters Bar -->
+                <div class="filters-bar">
+                    <div class="search-input-wrap">
+                        <span class="search-icon-pos">🔍</span>
+                        <input type="text" id="catalogSearch" placeholder="ابحث بالاسم أو المواصفات (مثلاً: RTX، Ryzen، 16GB)...">
+                    </div>
+
+                    <div class="filter-group">
+                        <!-- Badge Filter -->
+                        <select id="badgeFilter" class="filter-select">
+                            <option value="all">كل الحالات والـ Badges</option>
+                            <option value="offer">🔥 العروض والتخفيضات فقط</option>
+                            <option value="new">🟢 جديد (Neuf sous emballage)</option>
+                            <option value="used">🟠 مستعمل مفحوص (État Neuf)</option>
+                        </select>
+
+                        <!-- Price Sorting -->
+                        <select id="priceSort" class="filter-select">
+                            <option value="default">الترتيب الافتراضي</option>
+                            <option value="price-low">السعر: من الأقل للأعلى</option>
+                            <option value="price-high">السعر: من الأعلى للأقل</option>
+                            <option value="newest">الأحدث وصولاً للمتجر</option>
+                        </select>
+
+                        <!-- In stock toggle -->
+                        <label style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:700; cursor:pointer; color:var(--text-muted); background:var(--bg-main); padding:9px 14px; border:1px solid var(--border-color); border-radius:var(--radius-sm);">
+                            <input type="checkbox" id="inStockOnly">
+                            <span>متوفر في المخزون فقط</span>
+                        </label>
                     </div>
                 </div>
-                <div class="footer-bottom">© 2026 PC STORE</div>
-            </div>
-        </footer>
 
-        <script src="js/products.js"></script>
-        <script src="js/products-page.js"></script>
-    </body>
+                <!-- Active Filter Summary & Count -->
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; font-size:14px; color:var(--text-dim);">
+                    <div>
+                        عرض <strong id="resultsCount" style="color:var(--primary-light);">0</strong> منتج
+                    </div>
+                    <button id="resetFiltersBtn" style="color:var(--text-dim); text-decoration:underline; font-size:13px; display:none;">
+                        إعادة ضبط الفلاتر ↺
+                    </button>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="products-grid" id="catalogProductsGrid">
+                    <!-- Products will be dynamically populated -->
+                </div>
+
+                <!-- Empty State -->
+                <div class="no-products-state" id="catalogEmptyState" style="display: none;">
+                    <div class="icon">🔎</div>
+                    <h3>لم نجد أي منتج يطابق خيارات البحث</h3>
+                    <p>جرب كتابة مصطلح آخر، أو إزالة بعض الفلاتر المحددة.</p>
+                    <button class="btn btn-secondary" onclick="resetAllFilters()">عرض كل المنتجات</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2026 PC STORE - KHALIL TECH. جميع الحقوق محفوظة.</p>
+                <div style="display:flex; gap:15px;">
+                    <a href="index.html">الرئيسية</a>
+                    <a href="cart.html">السلة</a>
+                    <a href="admin.html" style="color:var(--primary-light);">⚡ لوحة تحكم خليل تك (دخول المالك)</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/products-page.js"></script>
+</body>
 </html>

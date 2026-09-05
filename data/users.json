@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "name": "خليل تك",
+    "email": "khalil@pcstore.dz",
+    "phone": "0550123456",
+    "password": "admin",
+    "role": "admin",
+    "wilaya": "48 - غليزان",
+    "address": "المقر الرئيسي",
+    "createdAt": "2026-01-01T10:00:00.000Z"
+  }
+]

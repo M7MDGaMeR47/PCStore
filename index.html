@@ -1,158 +1,311 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC STORE - KHALIL TECH | متجر كمبيوتر ولابتوبات Gaming في الجزائر</title>
+    <meta name="description" content="متجر أجهزة كمبيوتر Gaming، قطع PC، لابتوبات وإكسسوارات بأسعار تنافسية، فحص وضمان حقيقي مع توصيل ودفع عند الاستلام لـ 58 ولاية.">
+    <meta property="og:title" content="PC STORE - KHALIL TECH">
+    <meta property="og:description" content="متجر أجهزة كمبيوتر Gaming وقطع غيار أصلية بأسعار تنافسية في الجزائر.">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="top-bar-left">
+                <span class="top-badge">🔥 عروض خاصة</span>
+                <span>توصيل سريع متوفر لكافة ولايات الوطن (58 ولاية) والدفع عند الاستلام 🚚</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="tel:0550123456" class="top-bar-link">📞 0550 12 34 56</a>
+                <a href="https://wa.me/213550123456" target="_blank" class="top-bar-link" style="color:#34d399;">💬 واتساب مباشر</a>
+                <a href="account.html" class="top-bar-link">👤 حسابي</a>
+                <a href="admin.html" class="top-bar-link" style="color:var(--text-dim); font-size:11px;">⚙️ دخول الإدارة</a>
+            </div>
+        </div>
+    </div>
 
-        <title>PC STORE - KHALIL TECH</title>
-        <link rel="stylesheet" href="css/style.css">
-    </head>
-    <body>
-        <!-- NAVIGATION -->
-        <header class="navbar">
-            <div class="container navbar-content">
-                <a href="#" class="logo">
+    <!-- Main Navigation Bar -->
+    <header class="navbar">
+        <div class="container navbar-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">⚡</div>
+                <div>
                     PC<span>STORE</span>
+                    <span class="logo-sub">KHALIL TECH</span>
+                </div>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html" class="active">الرئيسية</a>
+                <a href="products.html">جميع المنتجات</a>
+                <a href="products.html?badge=offer" style="color:#f87171;">🔥 العروض</a>
+                <a href="#categoriesSection">الفئات</a>
+                <a href="admin.html" style="color:var(--primary-light); font-weight:700;">⚡ لوحة خليل تك</a>
+                <a href="#contactSection">اتصل بنا</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="admin.html" class="btn btn-secondary btn-sm" style="font-size:12px; padding:6px 12px; white-space:nowrap;" title="بوابة خليل تك والمصمم">⚡ خليل تك</a>
+                <button class="action-btn search-btn" title="بحث فوري (Ctrl+K)">🔍</button>
+                <a href="cart.html" class="action-btn cart-btn" title="سلة المشتريات">
+                    🛒<span class="cart-count">0</span>
                 </a>
-                <nav class="nav-links">
-                    <a href="#">الرئيسية</a>
-                    <a href="#">أجهزة الكمبيوتر</a>
-                    <a href="#">اللابتوبات</a>
-                    <a href="#">الاكسسوارات</a>
-                    <a href="#">العروض</a>
-                </nav>
-                <div class="nav-actions">
-                    <button class="search-btn">🔍</button>
-                    <button class="cart-btn"><span class="cart-count">0</span> 🛒</button>
+                <button class="action-btn hamburger-btn" title="القائمة">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <div class="hero-tag">
+                        <span>🎮</span> متجرك الموثوق للـ Gaming والهاردوير في الجزائر
+                    </div>
+                    <h1>
+                        كل ما تحتاجه لعالم الـ PC <br>
+                        <span class="gradient-text">في مكان واحد وبضمان</span>
+                    </h1>
+                    <p class="hero-description">
+                        أجهزة كمبيوتر Gaming مجمعة باحترافية، كروت شاشة أصلية ومفحوصة، معالجات، لابتوبات وإكسسوارات بأسعار مدروسة وتوصيل فوري لباب منزلك مع الدفع عند الاستلام.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="products.html" class="btn btn-primary btn-lg">تصفح المنتجات ⚡</a>
+                        <a href="products.html?badge=offer" class="btn btn-secondary btn-lg">🔥 شاهد عروض اليوم</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat-item">
+                            <strong>58 ولاية</strong>
+                            <span>شحن وتوصيل للمنزل</span>
+                        </div>
+                        <div class="hero-stat-item">
+                            <strong>100%</strong>
+                            <span>قطع مفحوصة ومضمونة</span>
+                        </div>
+                        <div class="hero-stat-item">
+                            <strong>الدفع</strong>
+                            <span>عند الاستلام والمعاينة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic Showcase -->
+                <div class="hero-showcase">
+                    <div class="hero-card">
+                        <div class="hero-floating-badge badge-top-left">
+                            <span>🛡️</span> ضمان فحص وتجربة
+                        </div>
+                        <div class="hero-floating-badge badge-bottom-right">
+                            <span>⚡</span> Ultra FPS Gaming
+                        </div>
+                        <div class="hero-card-img-wrap">
+                            <img src="image/pc1.jpg" alt="Gaming PC Showcase">
+                        </div>
+                        <div class="hero-card-info">
+                            <div>
+                                <h3 class="hero-card-title">Gaming PC Ryzen 5</h3>
+                                <p class="hero-card-sub">RTX 3060 12GB | 16GB RAM | 1TB NVMe</p>
+                            </div>
+                            <div class="hero-card-price">185,000 DA</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </header>
+        </section>
 
-        <main>
-            <!-- HERO -->
-            <section class="hero">
-                <div class="container hero-content">
-                    <div class="hero-text">
-                        <p class="hero-label">🔥 أجهزة Gaming جاهزة</p>
-                        <h1>جهازك القادم <span>يبدأ من هنا</span></h1>
-                        <p class="hero-description">اكتشف أجهزة كمبيوتر GAMING ولابتوبات واكسسوارات مختارة بعناية وبأسعار تنافسية</p>
-                        <div class="hero-buttons">
-                            <a href="products.html" class="btn btn-primary">اكتشف منتجات</a>
-                            <a href="#" class="btn btn-secondary">العروض الحالية</a>
-                        </div>
+        <!-- CATEGORIES SECTION -->
+        <section class="categories" id="categoriesSection">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <p class="section-label">اكتشف تشكيلتنا</p>
+                        <h2 class="section-title">تصفح القطع حسب الفئة</h2>
                     </div>
-                    <div class="hero-image">
-                        <div class="pc-card">
-                            <div class="pc-placeholder">
-                                PC
-                            </div>
-                        </div>
-                    </div>
+                    <a href="products.html" class="view-all-link">عرض كل المنتجات ←</a>
                 </div>
-            </section>
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Loaded dynamically via JS -->
+                </div>
+            </div>
+        </section>
 
-            <!-- CATEGORIES -->
-            <section class="categories">
-                <div class="container">
-                    <div class="section-header">
-                        <div>
-                            <p class="section-label">اكتشف متجرنا</p>
-                            <h2>تصفح حسب الفئة</h2>
-                        </div>
+        <!-- FEATURED PRODUCTS SECTION -->
+        <section class="featured-products">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <p class="section-label">اختيارات مميزة</p>
+                        <h2 class="section-title">أجهزة وقطع مختارة بعناية</h2>
                     </div>
-                    <div class="categories-grid">
-                        <a href="#" class="category-card">
-                            <div class="category-icon">🖥️</div>
-                            <h3>اجهزة كمبيوتر</h3>
-                            <p>Gaming و Office PC</p>
-                        </a>
-                        <a href="#" class="category-card">
-                            <div class="category-icon">💻</div>
-                            <h3>لابتوبات</h3>
-                            <p>للعمل والدراسة والألعاب</p>
-                        </a>
-                        <a href="#" class="category-card">
-                            <div class="category-icon">🎮</div>
-                            <h3>قيمينق</h3>
-                            <p>كل ما تحتاجه للألعاب</p>
-                        </a>
-                        <a href="#" class="category-card">
-                            <div class="category-icon">🖱️</div>
-                            <h3>الاكسسوارات</h3>
-                            <p>Mouse و Keyboard وغيرها</p>
-                        </a>
-                    </div>
+                    <a href="products.html" class="view-all-link">جميع المنتجات ←</a>
                 </div>
-            </section>  
-            
-            <!-- FEATURED PRODUCTS -->
-            <section class="featured-products">
-                <div class="container">
-                    <div class="section-header">
-                        <div>
-                            <p class="section-label">اختياراتنا</p>
-                            <h2>منتجات مميزة</h2>
-                        </div>
-                        <a href="products.html" class="view-all">جميع منتجات →</a>
-                    </div>
-                    <div class="products-grid" id="featuredProducts"></div>
+                <div class="products-grid" id="featuredProductsGrid">
+                    <!-- Loaded dynamically via JS -->
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- WHY US -->
-            <section class="why-us">
+        <!-- SPECIAL OFFERS SECTION -->
+        <section class="offers-section" id="offersSection">
+            <div class="container">
+                <div class="offers-banner">
+                    <div class="offers-banner-text">
+                        <h3>🔥 تخفيضات وعروض حصرية اليوم</h3>
+                        <p>استفد من أسعار استثنائية على تجميعات الـ PC وكروت الشاشة والـ SSD بكميات محدودة.</p>
+                    </div>
+                    <a href="products.html?badge=offer" class="btn btn-primary">تصفح جميع التخفيضات ⚡</a>
+                </div>
+                <div class="products-grid" id="offersProductsGrid">
+                    <!-- Discounted products loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- DIRECT WHATSAPP CONSULTATION & CUSTOM ORDERS -->
+        <section style="background: linear-gradient(180deg, rgba(34, 197, 94, 0.08) 0%, var(--bg-card) 100%); border-block: 1px solid rgba(34, 197, 94, 0.3); padding: 50px 0;">
+            <div class="container" style="max-width: 760px; text-align: center;">
+                <p class="section-label" style="color: #4ade80;">💬 تواصل مباشر وسريع</p>
+                <h2 style="font-size: 26px; font-weight: 900; margin-bottom: 12px;">تحتاج استشارة تقنية أو تبحث عن قطعة معينة؟</h2>
+                <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 25px; line-height: 1.7;">
+                    تحدث معنا مباشرة عبر تطبيق واتساب! أرسل مواصفات جهازك أو ميزانيتك وسيقوم صاحب المتجر "خليل تك" بالرد عليك فوراً وتقديم أفضل ترشيح يناسبك مع إمكانية التوصيل.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                    <a href="https://wa.me/213550123456?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%82%D8%B7%D8%B9%D8%A9%20%D8%A3%D9%88%20%D8%AC%D9%87%D8%A7%D8%B2" target="_blank" class="btn btn-primary" style="background:#22c55e; border-color:#22c55e; font-size: 16px; padding: 14px 28px;">
+                        📲 تواصل معنا مباشرة في واتساب
+                    </a>
+                    <a href="tel:0550123456" class="btn btn-secondary" style="font-size: 16px; padding: 14px 24px;">
+                        📞 اتصال هاتف: 0550 12 34 56
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY US (TRUST FEATURES) -->
+        <section class="why-us">
+            <div class="container">
                 <div class="section-header centered">
                     <div>
-                        <p class="section-label">لماذا نحن ؟</p>
-                        <h2>تجربة شراء مختلفة</h2>
+                        <p class="section-label">لماذا خليل تك؟</p>
+                        <h2 class="section-title">تجربة شراء احترافية وموثوقة</h2>
                     </div>
                 </div>
                 <div class="features-grid">
-                    <div class="feature">
-                        <div class="feature-icon"> 🚚 </div>
-                        <h3>توصيل لجميع الولايات</h3>
-                        <p>نوصل طلباتك إلى مختلف مناطق الجزائر</p>
-                    </div>  
-                    <div class="feature"> 
-                        <div class="feature-icon"> 🛡️ </div> 
-                        <h3>منتجات موثوقة</h3> 
-                        <p> منتجات مختارة بعناية لتناسب احتياجاتك</p> 
-                    </div> 
-                    <div class="feature"> 
-                        <div class="feature-icon"> ⚡ </div> 
-                        <h3>تجهيز سريع</h3> 
-                        <p> نعمل على تجهيز طلبك في أسرع وقت ممكن</p> 
-                    </div> 
-                    <div class="feature"> 
-                        <div class="feature-icon"> 💬 </div> 
-                        <h3>دعم العملاء</h3> 
-                        <p> نحن هنا لمساعدتك قبل وبعد الشراء</p> 
+                    <div class="feature-box">
+                        <div class="feature-icon-wrap">🚚</div>
+                        <h3>توصيل لـ 58 ولاية</h3>
+                        <p>شحن سريع وآمن إلى باب منزلك مع شركات التوصيل المعتمدة في الجزائر.</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon-wrap">💵</div>
+                        <h3>الدفع عند الاستلام</h3>
+                        <p>لا تدفع أي دينار مسبقاً، افحص سلامة الطرد وجهازك وادفع للموزع يداً بيد.</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon-wrap">🛡️</div>
+                        <h3>فحص واختبار 100%</h3>
+                        <p>جميع القطع والتجميعات تخضع لاختبارات الإجهاد والحرارة (Stress Test) قبل الشحن.</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon-wrap">💬</div>
+                        <h3>مرافقة ودعم فني</h3>
+                        <p>فريقنا التقني معك عبر الهاتف والواتساب قبل الشراء وبعده لأي استفسار أو نصيحة.</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
+    </main>
 
-            <!-- FOOTER -->
-            <footer class="footer">
-                <div class="container footer-content">
-                    <div>
-                        <a href="#" class="logo"> PC<span>STORE</span></a>
-                        <p>كل ما تحتاجه لعالم الكمبيوتر والـ Gaming</p>
+    <!-- FOOTER -->
+    <footer class="footer" id="contactSection">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">⚡</div>
+                        <div>PC<span>STORE</span> <span class="logo-sub">KHALIL TECH</span></div>
+                    </a>
+                    <p>
+                        متجر متخصص في بيع وتجميع أجهزة الكمبيوتر الاحترافية، اللابتوبات، وقطع الهاردوير الأصلية. نحرص على تقديم أفضل جودة بأنسب سعر مع خدمة توصيل ومتابعة ممتازة.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank" class="social-btn" title="صفحتنا على فيسبوك">f</a>
+                        <a href="https://instagram.com" target="_blank" class="social-btn" title="حسابنا على انستغرام">ig</a>
+                        <a href="https://wa.me/213550123456" target="_blank" class="social-btn" title="واتساب المتجر">wa</a>
                     </div>
+                </div>
 
+                <div class="footer-col">
+                    <h4>روابط سريعة</h4>
                     <div class="footer-links">
-                        <a href="#">الرئيسية</a>
-                        <a href="products.html">المنتجات</a>
-                        <a href="#">العروض</a>
-                        <a href="#">اتصل بنا</a>
+                        <a href="index.html">الرئيسية</a>
+                        <a href="products.html">جميع المنتجات</a>
+                        <a href="products.html?badge=offer">عروض اليوم والتخفيضات</a>
+                        <a href="cart.html">سلة المشتريات</a>
+                        <a href="account.html">حسابي الشخصي</a>
                     </div>
                 </div>
-                <div class="footer-bottom">
-                    <p>© 2026 PC STORE. جميع الحقوق محفوظة</p>
-                </div>
-            </footer>
-        </main>
 
-        <script src="js/products.js"></script>
-        <script src="js/app.js"></script>
-    </body>
+                <div class="footer-col">
+                    <h4>فئات الهاردوير</h4>
+                    <div class="footer-links">
+                        <a href="products.html?category=PC">أجهزة Gaming كاملة</a>
+                        <a href="products.html?category=GPU">كروت الشاشة (GPU)</a>
+                        <a href="products.html?category=CPU">المعالجات (CPU)</a>
+                        <a href="products.html?category=Laptops">اللابتوبات</a>
+                        <a href="products.html?category=SSD">أقراص SSD و HDD</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>معلومات المتجر والتواصل</h4>
+                    <div class="footer-contact-item">
+                        <span>📞</span>
+                        <div>
+                            <strong>الهاتف:</strong>
+                            <div>0550 12 34 56</div>
+                        </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <span>💬</span>
+                        <div>
+                            <strong>واتساب للطلبات:</strong>
+                            <div>+213 550 12 34 56</div>
+                        </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <span>📍</span>
+                        <div>
+                            <strong>المقر:</strong>
+                            <div>الجزائر - غليزان / توصيل لـ 58 ولاية</div>
+                        </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <span>🕒</span>
+                        <div>
+                            <strong>أوقات العمل:</strong>
+                            <div>السبت - الخميس (09:00 إلى 20:00)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 PC STORE - KHALIL TECH. جميع الحقوق محفوظة.</p>
+                <div style="display:flex; gap:15px;">
+                    <a href="products.html">جميع المنتجات</a>
+                    <a href="admin.html" style="color:var(--primary-light);">⚡ لوحة تحكم خليل تك (دخول المالك)</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
 </html>
